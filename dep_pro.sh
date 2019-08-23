@@ -7,8 +7,9 @@
 #常用变量
 shell_name="dep_pro.sh"
 time=$(date '+%Y%m%d-%H%M%S')
-log_file=/root/shell_deploy/logs/${shell_name}.log
-
+log_file="/root/shell_deploy/logs/${shell_name}.log"
+dep_pack_path="/root/"
+dep_pack_name="web.war"
 #工程目录-列表
 #tomcat目录
 pro_name="apache-tomcat-8.5.43-devopstest"
@@ -22,6 +23,7 @@ deploy_path="/test-dev/$pro_name/ROOT/"
 
 #回滚目录（上一次备份目录）
 rollback_path="/test-dev/rollback/$pro_name/ROOT_${time}"
+
 function shell_log()
 {
     log_info=$1

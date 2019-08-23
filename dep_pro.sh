@@ -1,21 +1,13 @@
 #!/bin/bash
 ###############################
-#decription:de	
-117.78.42.21
+#decription:deploy the project
 #author:kl
 #version:1.0
 ###############################
 #常用变量
 shell_name="dep_pro.sh"
 time=$(date '+%Y%m%d-%H%M%S')
-bak_path="/data/backup/${pro_name}"
 log_file=/root/shell_deploy/logs/${shell_name}.log
-
-#GIT变量
-git_code_path="/root/shell_deploy/git_code"
-git_pro_name="kl-jenkins-javatest"
-git_url="https://github.com/sei0jieai"
-git_branch_name="master"
 
 #工程目录-列表
 #tomcat目录

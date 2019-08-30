@@ -38,7 +38,7 @@ function backup()
     #备份部署目录到备份目录
     mv ${deploy_path}/${pro_name} ${backup_path}/${pro_name}_bak_${time}
     #解压新包到部署目录
-    mkdir ${dedeploy_path}/${pro_name} && unzip /root/${zip_pack_name} -d ${dedeploy_path}/${pro_name}
+    mkdir ${dedeploy_path}/${pro_name} && unzip /root/${zip_pack_name} -d ${deploy_path}/${pro_name}
 }
 
 

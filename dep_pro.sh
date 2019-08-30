@@ -58,4 +58,4 @@ function deploy()
 }
 
 
-deploy
+deploy $*

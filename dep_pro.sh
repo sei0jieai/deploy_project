@@ -49,7 +49,7 @@ function backup()
 function deploy()
 {
     local choice_num=$1
-    case ${choice} in
+    case ${choice_num} in
         #jenkins服务器上执行
         backup)
             backup

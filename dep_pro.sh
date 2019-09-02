@@ -103,6 +103,9 @@ function deploy()
         stop_pro)
             stop_pro
             ;;
+        start_pro)
+            start_pro
+            ;;
     esac
 }
 

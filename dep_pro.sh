@@ -75,7 +75,7 @@ function stop_pro()
     fi
 }
 
-function pro_start()
+function start_pro()
 {
     
     if [ $(ps -ef | grep "${pro_name}/conf" | grep -v "grep" | wc -l) -eq 0 ];then

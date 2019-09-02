@@ -15,7 +15,7 @@ pro_pid=`ps -ef|grep $pro_name|grep -v 'grep'|awk -F " " '{print $2}'`
 #tomcat目录
 pro_name="apache-tomcat-8.5.43-devopstest"
 pro_path="/data/${pro_name}"
-config_file="/test-dev/config_file/${pro_name}/*.conf"
+config_file="/test-dev/config_file/${pro_name}/"
 
 #备份目录
 backup_path="/data/backup/${pro_name}"

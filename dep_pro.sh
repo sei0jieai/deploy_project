@@ -69,6 +69,9 @@ function deploy()
         backup)
             backup
             ;;
+        add_conf)
+            add_conf
+            ;;
     esac
 }
 

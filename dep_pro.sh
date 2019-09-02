@@ -10,6 +10,7 @@ time=$(date '+%Y%m%d-%H%M%S')
 log_file="/root/shell_deploy/logs/${shell_name}.log"
 dep_pack_path="/root/"
 dep_pack_name="apache-tomcat-8.5.43-devopstest.war"
+pro_pid=`ps -ef|grep $pro_name|grep -v 'grep'|awk -F " " '{print $2}'`
 #工程目录-列表
 #tomcat目录
 pro_name="apache-tomcat-8.5.43-devopstest"
@@ -36,12 +37,26 @@ function backup()
 {
     local backup_filename="${pro_name}_bak_${time}.tar.gz"
     #备份部署目录到备份目录
-    mv ${deploy_path}/${pro_name} ${backup_path}/${pro_name}_bak_${time}
+    if [ -d ${deploy_path}/${pro_name} ];then
+        touch ${deploy_path}/${pro_name}
+            mv ${deploy_path}/${pro_name} ${backup_path}/${pro_name}_bak_${time}
+        [ $? -eq 0 ] && shell_log "move to ${backup_path} success." || { shell_log "move to ${backup_path} failed."; exit 1; }
+    fi
     #解压新包到部署目录
     mkdir ${deploy_path}/${pro_name} && unzip /root/${zip_pack_name} -d ${deploy_path}/${pro_name}
 }
 
 
+function add_conf()
+{
+    #复制配置文件至配置文件夹，以WEB-INF为例子
+    cp -f ${config_file}/* ${deploy_path}/${pro_name}/WEB-INF
+    if [ $? -eq 0 ]; then
+        shell_log "copy config_file success!"
+    else
+        shell_log "copy config_file failed!" && exit 1
+    fi
+}
 
 
 

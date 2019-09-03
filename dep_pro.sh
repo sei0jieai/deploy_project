@@ -140,6 +140,12 @@ function deploy()
         unzip_package)
             unzip_package
             ;;
+        deploy)
+            backup
+            unzip_package
+            add_conf
+            stop_pro
+            start_pro   
     esac
 }
 

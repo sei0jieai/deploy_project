@@ -98,8 +98,8 @@ function rollback()
 {
     #获取时间最近的一个备份包
     [ ! -d ${rollback_path} ] && mkdir -p ${rollback_path}
-        local last_package=$(ll -t ${rollback_path} | grep "${pro_path}" | head -1 | awk -F " " '{print $NF}')
-    [ ! -z ${last_package} ] && shell_log "the rolled back file is ${rollback_path}/${last_package}" || { shell_log "no rolled back file in ${rollback_path}, exit!"; exit 1; }
+        local last_package=$(ls -lt ${backup_path} | grep "${pro_path}" | head -1 | awk -F " " '{print $NF}')
+    [ ! -z ${last_package} ] && shell_log "the rolled back file is ${backup_path}/${last_package}" || { shell_log "no rolled back file in ${rollback_path}, exit!"; exit 1; }
     
 #####################################################################################
     

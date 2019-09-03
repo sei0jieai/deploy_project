@@ -113,7 +113,7 @@ function rollback()
         mv ${deploy_path}/${pro_name}/${zip_pro_name} ${rollback_path}/${zip_pro_name}_roll_${now_time}
     fi
 
-    cp -r ${backup_path}/${last_package} ${pro_path}
+    cp -r ${backup_path}/${last_package} ${deploy_path}
     [ $? -eq 0 ] && shell_log "copy ${last_package} to /data/apache-tomcat success." || shell_log "copy ${last_package} to /data/xpand failed."    
 }
 

@@ -43,10 +43,14 @@ function backup()
             mv ${deploy_path}/${pro_name} ${backup_path}/${pro_name}_bak_${time}
         [ $? -eq 0 ] && shell_log "move to ${backup_path} success." || { shell_log "move to ${backup_path} failed."; exit 1; }
     fi
-    #解压新包到部署目录
-    mkdir ${deploy_path}/${pro_name} && unzip /root/${zip_pro_name} -d ${deploy_path}/${pro_name}
+    
 }
 
+function unzip_package()
+{
+   #解压新包到部署目录
+    mkdir ${deploy_path}/${pro_name} && mv -f /root/${zip_pro_name} ${deploy_path}/${pro_name}/ && unzip ${deploy_path}/${pro_name}/${zip_pro_name} -d ${deploy_path}/${pro_name} 
+}
 
 function add_conf()
 {
@@ -86,8 +90,37 @@ function start_pro()
     else
         shell_log "${pro_name} already started, do nothing."
     fi
+    #tail -f ${pro_path}/logs/catalina.out
 }
 
+function rollback()
+{
+    #获取时间最近的一个备份包
+    [ ! -d ${rollback_path} ] && mkdir -p ${rollback_path}
+        local last_package=$(ll -t ${rollback_path} | grep "${pro_path}" | head -1 | awk -F " " '{print $NF}')
+    [ ! -z ${last_package} ] && shell_log "the rolled back file is ${rollback_path}/${last_package}" || { shell_log "no rolled back file in ${rollback_path}, exit!"; exit 1; }
+    
+#####################################################################################
+    
+    if [ -d ${deploy_path}/${pro_name} ];then
+        touch ${deploy_path}/${pro_name}}
+        mv ${deploy_path}/${pro_name} ${rollback_path}/${pack_name}_roll_${time}
+        [ $? -eq 0 ] && shell_log "move to ${rollback_path} success." || { shell_log "move to ${rollback_path} failed."; exit 1; }
+    fi
+    if [ -e ${pro_path}.zip ];then
+        touch ${pro_path}.zip
+        mv ${pro_path}.zip ${rollback_path}/${pack_name}.zip_roll_${now_time}
+    elif [ -e ${pro_path}.tar.gz ];then
+        touch ${pro_path}.tar.gz
+        mv ${pro_path}.tar.gz ${rollback_path}/${pack_name}.tar.gz_roll_${now_time}
+    elif [ -e ${pro_path}.war ];then
+        touch ${pro_path}.war
+        mv ${pro_path}.war ${rollback_path}/${pack_name}.tar.gz_roll_${now_time}
+    fi
+
+    cp -r ${mod_bak_dir}/${last_package} ${pro_path}
+    [ $? -eq 0 ] && shell_log "copy ${last_package} to /data/xpand success." || shell_log "copy ${last_package} to /data/xpand failed."    
+}
 
 function deploy()
 {
@@ -105,6 +138,9 @@ function deploy()
             ;;
         start_pro)
             start_pro
+            ;;
+        rollback)
+            rollback
             ;;
     esac
 }

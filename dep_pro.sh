@@ -108,19 +108,13 @@ function rollback()
         mv ${deploy_path}/${pro_name} ${rollback_path}/${pack_name}_roll_${time}
         [ $? -eq 0 ] && shell_log "move to ${rollback_path} success." || { shell_log "move to ${rollback_path} failed."; exit 1; }
     fi
-    if [ -e ${pro_path}.zip ];then
-        touch ${pro_path}.zip
-        mv ${pro_path}.zip ${rollback_path}/${pack_name}.zip_roll_${now_time}
-    elif [ -e ${pro_path}.tar.gz ];then
-        touch ${pro_path}.tar.gz
-        mv ${pro_path}.tar.gz ${rollback_path}/${pack_name}.tar.gz_roll_${now_time}
-    elif [ -e ${pro_path}.war ];then
-        touch ${pro_path}.war
-        mv ${pro_path}.war ${rollback_path}/${pack_name}.tar.gz_roll_${now_time}
+    if [ -e ${deploy_path}/${pro_name}/${zip_pro_name} ];then
+        touch ${deploy_path}/${pro_name}/${zip_pro_name}
+        mv ${deploy_path}/${pro_name}/${zip_pro_name} ${rollback_path}/${zip_pro_name}_roll_${now_time}
     fi
 
-    cp -r ${mod_bak_dir}/${last_package} ${pro_path}
-    [ $? -eq 0 ] && shell_log "copy ${last_package} to /data/xpand success." || shell_log "copy ${last_package} to /data/xpand failed."    
+    cp -r ${backup_path}/${pro_name}/${last_package} ${pro_path}
+    [ $? -eq 0 ] && shell_log "copy ${last_package} to /data/apache-tomcat success." || shell_log "copy ${last_package} to /data/xpand failed."    
 }
 
 function deploy()

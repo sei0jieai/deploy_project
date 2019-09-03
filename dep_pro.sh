@@ -56,7 +56,7 @@ function unzip_package()
 function add_conf()
 {
     #复制配置文件至配置文件夹，以WEB-INF为例子
-    cp -f ${config_file}/* ${deploy_path}/${pro_name}/WEB-INF
+    cp -f ${config_file_path}/* ${deploy_path}/${pro_name}/WEB-INF
     if [ $? -eq 0 ]; then
         shell_log "copy config_file success!"
     else

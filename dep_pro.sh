@@ -125,7 +125,7 @@ function rollback()
 
 function deploy()
 {
-    local choice_num=$1
+    local choice_num=$1 
     case ${choice_num} in
         #jenkins服务器上执行
         backup)

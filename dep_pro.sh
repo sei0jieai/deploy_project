@@ -140,7 +140,7 @@ function deploy()
         unzip_package)
             unzip_package
             ;;
-        deploy)
+        start_dep)
             backup
             unzip_package
             add_conf

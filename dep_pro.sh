@@ -145,7 +145,8 @@ function deploy()
             unzip_package
             add_conf
             stop_pro
-            start_pro   
+            start_pro
+            ;;
     esac
 }
 

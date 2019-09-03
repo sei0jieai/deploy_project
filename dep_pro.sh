@@ -137,6 +137,9 @@ function deploy()
         rollback)
             rollback
             ;;
+        unzip_package)
+            unzip_package
+            ;;
     esac
 }
 

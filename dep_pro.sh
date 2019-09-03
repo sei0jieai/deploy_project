@@ -104,8 +104,8 @@ function rollback()
 #####################################################################################
     
     if [ -d ${deploy_path}/${pro_name} ];then
-        touch ${deploy_path}/${pro_name}}
-        mv ${deploy_path}/${pro_name} ${rollback_path}/${pack_name}_roll_${time}
+        touch ${deploy_path}/${pro_name}
+        mv ${deploy_path}/${pro_name} ${rollback_path}/${pro_name}_roll_${time}
         [ $? -eq 0 ] && shell_log "move to ${rollback_path} success." || { shell_log "move to ${rollback_path} failed."; exit 1; }
     fi
     if [ -e ${deploy_path}/${pro_name}/${zip_pro_name} ];then

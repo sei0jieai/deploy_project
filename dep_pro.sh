@@ -5,12 +5,13 @@
 #version:1.0
 ###############################
 #常用变量
+source /etc/profile
 shell_name="dep_pro.sh"
 time=$(date '+%Y%m%d-%H%M%S')
 log_file="/root/shell_deploy/logs/${shell_name}.log"
 dep_pack_path="/root/"
 dep_pro_name="apache-tomcat-8.5.43-devopstest.war"
-pro_pid=`ps -ef|grep $pro_name|grep -v 'grep'|awk -F " " '{print $2}'`
+pro_pid=`ps -ef|grep apache-tomcat-8.5.43-devopstest|grep -v 'grep'|awk -F " " '{print $2}'`
 #工程目录-列表
 #tomcat目录
 pro_name="apache-tomcat-8.5.43-devopstest"
